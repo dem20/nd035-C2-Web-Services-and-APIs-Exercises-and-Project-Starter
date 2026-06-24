@@ -1,6 +1,10 @@
 package com.example.consuming;
 
+import com.example.consuming.entity.DictionaryEntry;
 import com.example.consuming.entity.Joke;
+
+import java.util.Arrays;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -30,6 +34,10 @@ public class ConsumingApplication {
 			Joke joke = restTemplate.getForObject(
 					"https://official-joke-api.appspot.com/random_joke", Joke.class);
 			log.info(joke.toString());
+
+			DictionaryEntry[] dictionaryEntry = restTemplate.getForObject(
+					"https://api.dictionaryapi.dev/api/v2/entries/en/hello", DictionaryEntry[].class);
+			Arrays.asList(dictionaryEntry).forEach(entry -> log.info(entry.toString()));
 		};
 	}
 
